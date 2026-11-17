@@ -1,7 +1,11 @@
-# Event-Driven Order Processing
+# Choreo
+
+**Event-driven order processing with Spring Boot microservices.**
 
 Spring Boot microservices that process orders through Apache Kafka, secured with
 OAuth2/OIDC (Keycloak) and JWT, and run as Docker containers behind an API gateway.
+The name comes from the pattern at its core: no central coordinator tells the services
+what to do. Each one reacts to events from the others, a **choreographed saga**.
 
 **Stack:** Java 21 · Spring Boot 3.3 · Spring Cloud Gateway · Spring Security (OAuth2 resource server) ·
 Spring Kafka · Spring Data JPA · PostgreSQL · Keycloak · Docker Compose · JUnit 5 / Mockito / Embedded Kafka
