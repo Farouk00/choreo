@@ -1,0 +1,29 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${JWT_ISSUER_URI:http://localhost:8180/realms/orders}
+          jwk-set-uri: ${JWT_JWK_SET_URI:http://localhost:8180/realms/orders/protocol/openid-connect/certs}
+  cloud:
+    gateway:
+      routes:
+        - id: order-service
+          uri: ${ORDER_SERVICE_URL:http://localhost:8081}
+          predicates:
+            - Path=/api/orders/**
+        - id: inventory-service
+          uri: ${INVENTORY_SERVICE_URL:http://localhost:8082}
+          predicates:
+            - Path=/api/inventory/**
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
